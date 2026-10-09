@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Результаты подбора - Kyrgyz Tur{% endblock %}
+
+{% block content %}
+<style>
+    .search-params {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+    }
+    .search-params h3 {
+        color: #667eea;
+        margin-bottom: 1rem;
+    }
+    .result-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .result-info {
+        flex: 1;
+    }
+    .result-title {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+    .result-meta {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+    .match-badge {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 20px;
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+    .result-actions {
+        text-align: right;
+    }
+    .price-tag {
+        font-size: 1.8rem;
+        color: #667eea;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<h1>🎯 Результаты подбора туров</h1>
+
+<div class="search-params">
+    <h3>Ваши критерии поиска:</h3>
+    <p><strong>Бюджет:</strong> до {{ budget }} сом</p>
+    {% if duration %}
+        <p><strong>Длительность:</strong> {{ duration }} дней</p>
+    {% endif %}
+    <p><strong>Интересы:</strong> {{ interests }}</p>
+</div>
+
+{% if scored_tours %}
+    <p style="margin-bottom: 2rem;">Найдено подходящих туров: <strong>{{ scored_tours|length }}</strong></p>
+
+    {% for item in scored_tours %}
+        <div class="result-card">
+            <div class="result-info">
+                <div>
+                    <span class="match-badge">{{ item.match_percentage }}% совпадение</span>
+                    {% if item.score >= 3 %}
+                        <span style="color: green; font-weight: bold;">⭐ Отличное совпадение!</span>
+                    {% elif item.score >= 2 %}
+                        <span style="color: orange; font-weight: bold;">✓ Хорошее совпадение</span>
+                    {% endif %}
+                </div>
+                <h3 class="result-title">{{ item.tour.name }}</h3>
+                <div class="result-meta">
+                    📍 {{ item.tour.region.name }} |
+                    ⏱️ {{ item.tour.duration_days }} дн. |
+                    💪 {{ item.tour.get_difficulty_display }}
+                </div>
+                <p>{{ item.tour.description|truncatewords:30 }}</p>
+            </div>
+            <div class="result-actions">
+                <div class="price-tag">{{ item.price|floatformat:2 }} сом</div>
+                <a href="{% url 'tours:tour_detail' item.tour.slug %}" class="btn">Подробнее</a>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div style="text-align: center; padding: 3rem; background: #f8f9fa; border-radius: 8px;">
+        <h2 style="color: #666;">😔 К сожалению, подходящих туров не найдено</h2>
+        <p style="margin: 1rem 0;">Попробуйте изменить параметры поиска:</p>
+        <ul style="text-align: left; max-width: 400px; margin: 1rem auto;">
+            <li>Увеличьте бюджет</li>
+            <li>Измените длительность тура</li>
+            <li>Попробуйте другие ключевые слова для интересов</li>
+        </ul>
+        <a href="{% url 'tours:tour_recommend' %}" class="btn" style="margin-top: 1rem;">Попробовать снова</a>
+        <a href="{% url 'tours:tour_list' %}" class="btn btn-secondary" style="margin-top: 1rem;">Посмотреть все туры</a>
+    </div>
+{% endif %}
+
+<div style="text-align: center; margin-top: 2rem;">
+    <a href="{% url 'tours:tour_recommend' %}" class="btn btn-secondary">Изменить параметры</a>
+</div>
+
+{% endblock %}

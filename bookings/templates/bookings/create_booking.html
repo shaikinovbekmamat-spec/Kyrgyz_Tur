@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}<h1>Заявка: {{ tour.name }}</h1>
+<p>Дата: {{ tour_date.date }}. Свободно мест: {{ tour_date.available_spots }}.</p>
+<p>Стоимость на человека: {{ final_price|floatformat:2 }} сом.</p>
+<p>Оплата онлайн не требуется. Администратор проверит места и подтвердит заявку.</p>
+<form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn">Отправить заявку</button></form>
+{% endblock %}

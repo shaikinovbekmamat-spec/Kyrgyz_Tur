@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tour.name }} - Kyrgyz Tur{% endblock %}
+
+{% block content %}
+<style>
+    .tour-detail {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    .tour-header {
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+    .tour-header h1 {
+        color: #667eea;
+        margin-bottom: 0.5rem;
+    }
+    .tour-meta {
+        display: flex;
+        gap: 2rem;
+        color: #666;
+        font-size: 0.9rem;
+    }
+    .price-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .price-box .price {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 0.5rem 0;
+    }
+    .section {
+        margin: 2rem 0;
+    }
+    .section h2 {
+        color: #667eea;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 0.5rem;
+    }
+    .dates-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+    .date-card {
+        border: 2px solid #667eea;
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+    }
+    .date-card.unavailable {
+        border-color: #ddd;
+        opacity: 0.5;
+    }
+    .reviews {
+        margin-top: 3rem;
+    }
+    .review-card {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+    }
+    .rating {
+        color: #ffc107;
+    }
+    .similar-tours {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    .similar-tour-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+</style>
+
+<div class="tour-detail">
+    <div class="tour-header">
+        <h1>{{ tour.name }}</h1>
+        <div class="tour-meta">
+            <span>📍 {{ tour.region.name }}</span>
+            <span>⏱️ {{ tour.duration_days }} дней</span>
+            <span>💪 {{ tour.get_difficulty_display }}</span>
+            <span>👥 Макс. {{ tour.max_participants }} чел.</span>
+            {% if tour.category %}
+                <span>🏷️ {{ tour.category.name }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="price-box">
+        <div>Цена за человека</div>
+        <div class="price">{{ tour.price }} сом</div>
+        <div>⭐ {% if avg_rating %}{{ avg_rating|floatformat:1 }}/5{% else %}Нет отзывов{% endif %}</div>
+    </div>
+
+    <div class="section">
+        <h2>Описание</h2>
+        <p>{{ tour.description }}</p>
+    </div>
+
+    <div class="section">
+        <h2>Маршрут</h2>
+        <p style="white-space: pre-line;">{{ tour.route }}</p>
+    </div>
+
+    {% if tour.included %}
+    <div class="section">
+        <h2>Что включено</h2>
+        <p style="white-space: pre-line;">{{ tour.included }}</p>
+    </div>
+    {% endif %}
+
+    {% if tour.not_included %}
+    <div class="section">
+        <h2>Что не включено</h2>
+        <p style="white-space: pre-line;">{{ tour.not_included }}</p>
+    </div>
+    {% endif %}
+
+    <div class="section">
+        <h2>Доступные даты</h2>
+        {% if available_dates %}
+            <div class="dates-grid">
+                {% for date in available_dates %}
+                    <div class="date-card">
+                        <div><strong>{{ date.date|date:"d.m.Y" }}</strong></div>
+                        <div>Свободно мест: {{ date.available_spots }}</div>
+                        <div style="margin-top: 0.5rem; font-size: 1.2rem; color: #667eea;">
+                            {{ date.get_final_price }} сом
+                        </div>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'bookings:create_booking' tour.id date.id %}" class="btn" style="margin-top: 0.5rem; font-size: 0.9rem;">Забронировать</a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="btn" style="margin-top: 0.5rem; font-size: 0.9rem;">Войдите для бронирования</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>К сожалению, нет доступных дат для этого тура.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% if reviews %}
+<div class="reviews">
+    <h2>Отзывы ({{ reviews.count }})</h2>
+    {% for review in reviews %}
+        <div class="review-card">
+            <div class="review-header">
+                <strong>{{ review.user.username }}</strong>
+                <span class="rating">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= review.rating %}⭐{% endif %}
+                    {% endfor %}
+                </span>
+            </div>
+            <p>{{ review.comment }}</p>
+            <small style="color: #666;">{{ review.created_at|date:"d.m.Y" }}</small>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if similar_tours %}
+<div class="section">
+    <h2>Похожие туры</h2>
+    <div class="similar-tours">
+        {% for similar in similar_tours %}
+            <div class="similar-tour-card">
+                <h4>{{ similar.name }}</h4>
+                <p>{{ similar.description|truncatewords:15 }}</p>
+                <div style="margin-top: 0.5rem;">
+                    <strong>{{ similar.price }} сом</strong>
+                </div>
+                <a href="{% url 'tours:tour_detail' similar.slug %}" class="btn" style="margin-top: 0.5rem; font-size: 0.9rem;">Подробнее</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

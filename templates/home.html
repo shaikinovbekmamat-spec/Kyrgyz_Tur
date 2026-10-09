@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Kyrgyz Tur{% endblock %}
+
+{% block content %}
+<style>
+    .hero {
+        text-align: center;
+        padding: 4rem 0;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        border-radius: 10px;
+        margin-bottom: 3rem;
+    }
+    .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #667eea;
+    }
+    .hero p {
+        font-size: 1.3rem;
+        color: #666;
+        margin-bottom: 2rem;
+    }
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+    .feature-card {
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform 0.3s;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+    .feature-card h3 {
+        color: #667eea;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+    .icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="hero">
+    <h1>Добро пожаловать в Kyrgyz Tur!</h1>
+    <p>Откройте для себя красоты Кыргызстана</p>
+    <a href="{% url 'tours:tour_list' %}" class="btn">Посмотреть туры</a>
+    {% if not user.is_authenticated %}
+        <a href="{% url 'login' %}" class="btn btn-secondary">Войти</a>
+    {% endif %}
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <div class="icon">🏔️</div>
+        <h3>Иссык-Куль</h3>
+        <p>Жемчужина Кыргызстана. Высокогорное озеро с кристально чистой водой и величественными горами.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="icon">🌊</div>
+        <h3>Сон-Куль</h3>
+        <p>Альпийское озеро на высоте 3000 метров. Идеальное место для единения с природой.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="icon">🌲</div>
+        <h3>Ала-Арча</h3>
+        <p>Национальный парк с горными ущельями, водопадами и множеством треккинговых маршрутов.</p>
+    </div>
+</div>
+
+<div style="text-align: center; margin: 3rem 0;">
+    <h2 style="margin-bottom: 1.5rem;">Почему выбирают нас?</h2>
+    <div class="features">
+        <div class="feature-card">
+            <div class="icon">✓</div>
+            <h3>Опытные гиды</h3>
+            <p>Профессиональные гиды с многолетним опытом</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">🎯</div>
+            <h3>Подбор тура</h3>
+            <p>Алгоритм подбора тура по вашему бюджету и интересам</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">💰</div>
+            <h3>Честные цены</h3>
+            <p>Прозрачное ценообразование без скрытых платежей</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
