@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
-{% block content %}<h1>Заявка №{{ booking.pk }}</h1>
-<h2>{{ booking.tour.name }}</h2><p>Статус: {{ booking.get_status_display }}</p>
-<p>Дата: {{ booking.tour_date.date }}. Участников: {{ booking.participants_count }}.</p>
-<p>Общая стоимость: {{ booking.total_price|floatformat:2 }} сом.</p>
+{% load i18n %}
+{% block content %}<h1>{% translate "Заявка №" %}{{ booking.pk }}</h1>
+<h2>{{ booking.tour.name }}</h2><p>{% translate "Статус:" %} {{ booking.get_status_display }}</p>
+<p>{% translate "Дата:" %} {{ booking.tour_date.date }}{% translate ". Участников:" %} {{ booking.participants_count }}.</p>
+<p>{% translate "Общая стоимость:" %} {{ booking.total_price|floatformat:2 }} {% translate "сом." %}</p>
 <p>{{ booking.contact_name }} · {{ booking.contact_phone }} · {{ booking.contact_email }}</p>
 <p>{{ booking.special_requests|linebreaksbr }}</p>
 {% if booking.status == 'pending' or booking.status == 'confirmed' %}
-<a class="btn btn-danger" href="{% url 'bookings:cancel_booking' booking.pk %}">Отменить заявку</a>{% endif %}
-<a href="{% url 'bookings:booking_list' %}">Все мои заявки</a>{% endblock %}
+<a class="btn btn-danger" href="{% url 'bookings:cancel_booking' booking.pk %}">{% translate "Отменить заявку" %}</a>{% endif %}
+<a href="{% url 'bookings:booking_list' %}">{% translate "Все мои заявки" %}</a>{% endblock %}

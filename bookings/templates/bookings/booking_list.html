@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-{% block content %}<h1>Мои заявки</h1>
+{% load i18n %}
+{% block content %}<h1>{% translate "Мои заявки" %}</h1>
 {% for booking in bookings %}<article class="booking-card">
 <h2><a href="{% url 'bookings:booking_detail' booking.pk %}">{{ booking.tour.name }}</a></h2>
-<p>{{ booking.tour_date.date }} · {{ booking.participants_count }} чел. · {{ booking.total_price }} сом</p>
+<p>{{ booking.tour_date.date }} · {{ booking.participants_count }} {% translate "чел. ·" %} {{ booking.total_price }} {% translate "сом" %}</p>
 <p>{{ booking.get_status_display }}</p></article>
-{% empty %}<p>У вас пока нет заявок. <a href="{% url 'tours:tour_list' %}">Выбрать тур</a></p>{% endfor %}
+{% empty %}<p>{% translate "У вас пока нет заявок." %} <a href="{% url 'tours:tour_list' %}">{% translate "Выбрать тур" %}</a></p>{% endfor %}
 {% endblock %}

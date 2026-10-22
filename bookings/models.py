@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import User
 from tours.models import Tour, TourDate
@@ -8,31 +9,31 @@ from django.core.exceptions import ValidationError
 class Booking(models.Model):
     """Модель бронирования тура"""
     STATUS_CHOICES = [
-        ('pending', 'Ожидает подтверждения'),
-        ('confirmed', 'Подтверждено'),
-        ('cancelled', 'Отменено'),
-        ('completed', 'Завершено'),
+        ('pending', _('Ожидает подтверждения')),
+        ('confirmed', _('Подтверждено')),
+        ('cancelled', _('Отменено')),
+        ('completed', _('Завершено')),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookings', verbose_name="Пользователь")
-    tour = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='bookings', verbose_name="Тур")
-    tour_date = models.ForeignKey(TourDate, on_delete=models.CASCADE, related_name='bookings', verbose_name="Дата тура")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookings', verbose_name=_('Пользователь'))
+    tour = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='bookings', verbose_name=_('Тур'))
+    tour_date = models.ForeignKey(TourDate, on_delete=models.CASCADE, related_name='bookings', verbose_name=_('Дата тура'))
 
-    participants_count = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name="Количество участников")
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Общая стоимость")
+    participants_count = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name=_('Количество участников'))
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Общая стоимость'))
 
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name="Статус")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name=_('Статус'))
 
     # Контактная информация
-    contact_name = models.CharField(max_length=200, verbose_name="Контактное имя")
-    contact_phone = models.CharField(max_length=20, verbose_name="Телефон")
+    contact_name = models.CharField(max_length=200, verbose_name=_('Контактное имя'))
+    contact_phone = models.CharField(max_length=20, verbose_name=_('Телефон'))
     contact_email = models.EmailField(verbose_name="Email")
 
-    special_requests = models.TextField(blank=True, verbose_name="Особые пожелания")
+    special_requests = models.TextField(blank=True, verbose_name=_('Особые пожелания'))
 
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
-    confirmed_at = models.DateTimeField(null=True, blank=True, verbose_name="Дата подтверждения")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата создания'))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Дата обновления'))
+    confirmed_at = models.DateTimeField(null=True, blank=True, verbose_name=_('Дата подтверждения'))
 
     class Meta:
         verbose_name = "Бронирование"
@@ -91,18 +92,18 @@ class Booking(models.Model):
 
 class UserProfile(models.Model):
     """Расширенный профиль пользователя"""
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name="Пользователь")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name=_('Пользователь'))
 
-    phone = models.CharField(max_length=20, blank=True, verbose_name="Телефон")
-    date_of_birth = models.DateField(null=True, blank=True, verbose_name="Дата рождения")
+    phone = models.CharField(max_length=20, blank=True, verbose_name=_('Телефон'))
+    date_of_birth = models.DateField(null=True, blank=True, verbose_name=_('Дата рождения'))
 
     # Предпочтения для алгоритма подбора
-    preferred_budget_min = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name="Минимальный бюджет")
-    preferred_budget_max = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name="Максимальный бюджет")
-    preferred_duration_days = models.PositiveIntegerField(null=True, blank=True, verbose_name="Предпочитаемая длительность")
-    interests = models.TextField(blank=True, verbose_name="Интересы", help_text="Горы, озера, культура и т.д.")
+    preferred_budget_min = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name=_('Минимальный бюджет'))
+    preferred_budget_max = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name=_('Максимальный бюджет'))
+    preferred_duration_days = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Предпочитаемая длительность'))
+    interests = models.TextField(blank=True, verbose_name=_('Интересы'), help_text=_('Горы, озера, культура и т.д.'))
 
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата регистрации")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата регистрации'))
 
     class Meta:
         verbose_name = "Профиль пользователя"

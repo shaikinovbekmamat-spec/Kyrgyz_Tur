@@ -1,0 +1,644 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\nLanguage: en\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "% совпадение"
+msgstr "% match"
+
+msgid "&copy; 2026 Kyrgyz Tur. Туры по Кыргызстану - Иссык-Куль, Сон-Куль, Ала-Арча"
+msgstr "&copy; 2026 Kyrgyz Tur. Tours in Kyrgyzstan - Issyk-Kul, Son-Kul, Ala-Archa"
+
+msgid ", чтобы оставить комментарий."
+msgstr ", to leave a comment."
+
+msgid ". Свободно мест:"
+msgstr ". Available spots:"
+
+msgid ". Участников:"
+msgstr ". Participants:"
+
+msgid "1 день"
+msgstr "1 day"
+
+msgid "1.00 = базовая цена, 1.20 = +20%, 0.80 = -20%"
+msgstr "1.00 = base price, 1.20 = +20%, 0.80 = -20%"
+
+msgid "2 дня"
+msgstr "2 days"
+
+msgid "3 дня"
+msgstr "3 days"
+
+msgid "5 дней"
+msgstr "5 days"
+
+msgid "7 дней"
+msgstr "7 days"
+
+msgid "Kyrgyz Tur - Туры по Кыргызстану"
+msgstr "Kyrgyz Tur - Tours in Kyrgyzstan"
+
+msgid "Автор"
+msgstr "Author"
+
+msgid "Администратор"
+msgstr "Administration"
+
+msgid "Активен"
+msgstr "Active"
+
+msgid "Ала-Арча"
+msgstr "Ala-Archa"
+
+msgid "Алгоритм ищет туры, подходящие по вашему бюджету и длительности"
+msgstr "Finds tours matching your budget and duration"
+
+msgid "Алгоритм подбора тура по вашему бюджету и интересам"
+msgstr "Tour recommendations based on your budget and interests"
+
+msgid "Альпийское озеро на высоте 3000 метров. Идеальное место для единения с природой."
+msgstr "An alpine lake at 3,000 metres. The perfect place to reconnect with nature."
+
+msgid "Анализирует описания туров на соответствие вашим интересам"
+msgstr "Matches tour descriptions to your interests"
+
+msgid "Бронирование успешно отменено"
+msgstr "Booking cancelled successfully"
+
+msgid "Бюджет на человека, сом"
+msgstr "Budget per person, KGS"
+
+msgid "Бюджет не может быть отрицательным."
+msgstr "Budget cannot be negative."
+
+msgid "Бюджет:"
+msgstr "Budget:"
+
+msgid "Ваши критерии поиска:"
+msgstr "Your search criteria:"
+
+msgid "Введите текст сообщения."
+msgstr "Enter your message."
+
+msgid "Введите тему комментария."
+msgstr "Enter a comment subject."
+
+msgid "Вернуться"
+msgstr "Go back"
+
+msgid "Войдите"
+msgstr "Log in"
+
+msgid "Войдите для бронирования"
+msgstr "Log in to book"
+
+msgid "Войти"
+msgstr "Log in"
+
+msgid "Вперед"
+msgstr "Next"
+
+msgid "Все мои заявки"
+msgstr "All my bookings"
+
+msgid "Все регионы"
+msgstr "All regions"
+
+msgid "Вход"
+msgstr "Login"
+
+msgid "Вход в личный кабинет"
+msgstr "Log in to your account"
+
+msgid "Вход — Kyrgyz Tur"
+msgstr "Login — Kyrgyz Tur"
+
+msgid "Вы можете оставить отзыв только после завершения тура"
+msgstr "You can leave a review only after completing the tour"
+
+msgid "Вы уже оставили отзыв на этот тур"
+msgstr "You have already reviewed this tour"
+
+msgid "Выбрать тур"
+msgstr "Choose a tour"
+
+msgid "Выход ("
+msgstr "Log out ("
+
+msgid "Главная"
+msgstr "Home"
+
+msgid "Главная - Kyrgyz Tur"
+msgstr "Home - Kyrgyz Tur"
+
+msgid "Главное фото"
+msgstr "Main photo"
+
+msgid "Горы, озера, культура и т.д."
+msgstr "Mountains, lakes, culture, etc."
+
+msgid "Дата начала"
+msgstr "Start date"
+
+msgid "Дата обновления"
+msgstr "Updated at"
+
+msgid "Дата окончания"
+msgstr "End date"
+
+msgid "Дата подтверждения"
+msgstr "Confirmed at"
+
+msgid "Дата регистрации"
+msgstr "Registration date"
+
+msgid "Дата рождения"
+msgstr "Date of birth"
+
+msgid "Дата создания"
+msgstr "Created at"
+
+msgid "Дата тура"
+msgstr "Tour date"
+
+msgid "Дата:"
+msgstr "Date:"
+
+msgid "Длительность"
+msgstr "Duration"
+
+msgid "Длительность (дней)"
+msgstr "Duration (days)"
+
+msgid "Длительность, дней"
+msgstr "Duration, days"
+
+msgid "Длительность:"
+msgstr "Duration:"
+
+msgid "Добро пожаловать в Kyrgyz Tur!"
+msgstr "Welcome to Kyrgyz Tur!"
+
+msgid "Доступно только %(count)s мест."
+msgstr "Only %(count)s spots available."
+
+msgid "Доступные даты"
+msgstr "Available dates"
+
+msgid "Жемчужина Кыргызстана. Высокогорное озеро с кристально чистой водой и величественными горами."
+msgstr "The pearl of Kyrgyzstan. A mountain lake with crystal-clear water and majestic peaks."
+
+msgid "Забронировать"
+msgstr "Book now"
+
+msgid "Завершено"
+msgstr "Completed"
+
+msgid "Зарегистрироваться"
+msgstr "Sign up"
+
+msgid "Заявка отправлена. Места закрепляются после подтверждения администратором."
+msgstr "Request submitted. Spots are reserved after administrator confirmation."
+
+msgid "Заявка №"
+msgstr "Booking No."
+
+msgid "Заявка:"
+msgstr "Booking:"
+
+msgid "Измените длительность тура"
+msgstr "Change the tour duration"
+
+msgid "Изменить параметры"
+msgstr "Change criteria"
+
+msgid "Интересы"
+msgstr "Interests"
+
+msgid "Интересы:"
+msgstr "Interests:"
+
+msgid "Иссык-Куль"
+msgstr "Issyk-Kul"
+
+msgid "К сожалению, нет доступных дат для этого тура."
+msgstr "Sorry, there are no available dates for this tour."
+
+msgid "Каталог туров"
+msgstr "Tour catalogue"
+
+msgid "Каталог туров - Kyrgyz Tur"
+msgstr "Tour catalogue - Kyrgyz Tur"
+
+msgid "Категория"
+msgstr "Category"
+
+msgid "Количество участников"
+msgstr "Number of participants"
+
+msgid "Количество человек"
+msgstr "Number of people"
+
+msgid "Комментариев пока нет. Задайте вопрос или поделитесь впечатлениями!"
+msgstr "No comments yet. Ask a question or share your experience!"
+
+msgid "Комментарии"
+msgstr "Comments"
+
+msgid "Комментарий"
+msgstr "Comment"
+
+msgid "Комментарий опубликован."
+msgstr "Comment published."
+
+msgid "Комментарий появится сразу после отправки. Администратор может снять его с публикации."
+msgstr "Your comment will appear immediately. An administrator may unpublish it."
+
+msgid "Контактное имя"
+msgstr "Contact name"
+
+msgid "Легкий"
+msgstr "Easy"
+
+msgid "Любая длительность"
+msgstr "Any duration"
+
+msgid "Любая сложность"
+msgstr "Any difficulty"
+
+msgid "Макс. цена"
+msgstr "Max. price"
+
+msgid "Максимальный бюджет"
+msgstr "Maximum budget"
+
+msgid "Максимум должен быть не меньше минимума."
+msgstr "The maximum must be at least the minimum."
+
+msgid "Максимум участников"
+msgstr "Maximum participants"
+
+msgid "Маршрут"
+msgstr "Itinerary"
+
+msgid "Мин. цена"
+msgstr "Min. price"
+
+msgid "Минимальный бюджет"
+msgstr "Minimum budget"
+
+msgid "Модификатор цены"
+msgstr "Price multiplier"
+
+msgid "Мои бронирования"
+msgstr "My bookings"
+
+msgid "Мои заявки"
+msgstr "My requests"
+
+msgid "Назад"
+msgstr "Previous"
+
+msgid "Название категории"
+msgstr "Category name"
+
+msgid "Название региона"
+msgstr "Region name"
+
+msgid "Название тура"
+msgstr "Tour name"
+
+msgid "Найдено подходящих туров:"
+msgstr "Matching tours found:"
+
+msgid "Найдено туров:"
+msgstr "Tours found:"
+
+msgid "Напишите ваш комментарий"
+msgstr "Write your comment"
+
+msgid "Например: вопрос о маршруте"
+msgstr "For example: a question about the itinerary"
+
+msgid "Национальный парк с горными ущельями, водопадами и множеством треккинговых маршрутов."
+msgstr "A national park with mountain gorges, waterfalls and many hiking trails."
+
+msgid "Не удалось отменить бронирование"
+msgstr "Unable to cancel the booking"
+
+msgid "Нет аккаунта?"
+msgstr "No account yet?"
+
+msgid "Нет отзывов"
+msgstr "No reviews"
+
+msgid "Новые"
+msgstr "Newest"
+
+msgid "Общая стоимость"
+msgstr "Total price"
+
+msgid "Общая стоимость:"
+msgstr "Total price:"
+
+msgid "Обязательное поле. Не более 100 символов."
+msgstr "Required. No more than 100 characters."
+
+msgid "Обязательное поле. Не более 2000 символов."
+msgstr "Required. No more than 2000 characters."
+
+msgid "Ожидает подтверждения"
+msgstr "Pending confirmation"
+
+msgid "Описание"
+msgstr "Description"
+
+msgid "Описание маршрута поездки"
+msgstr "Trip itinerary description"
+
+msgid "Описание региона"
+msgstr "Region description"
+
+msgid "Оплата онлайн не требуется. Администратор проверит места и подтвердит заявку."
+msgstr "No online payment required. An administrator will check availability and confirm your request."
+
+msgid "Опубликован"
+msgstr "Published"
+
+msgid "Опубликовать комментарий"
+msgstr "Publish comment"
+
+msgid "Опытные гиды"
+msgstr "Experienced guides"
+
+msgid "Особые пожелания"
+msgstr "Special requests"
+
+msgid "Оставить комментарий"
+msgstr "Leave a comment"
+
+msgid "Отзывы ("
+msgstr "Reviews ("
+
+msgid "Откройте для себя красоты Кыргызстана"
+msgstr "Discover the beauty of Kyrgyzstan"
+
+msgid "Отмена заявки №"
+msgstr "Cancel booking No."
+
+msgid "Отменено"
+msgstr "Cancelled"
+
+msgid "Отменить заявку"
+msgstr "Cancel request"
+
+msgid "Отправить заявку"
+msgstr "Submit request"
+
+msgid "Оценка"
+msgstr "Rating"
+
+msgid "Первая"
+msgstr "First"
+
+msgid "Подбор тура"
+msgstr "Find a tour"
+
+msgid "Подбор тура - Kyrgyz Tur"
+msgstr "Find a tour - Kyrgyz Tur"
+
+msgid "Подобрать тур"
+msgstr "Find tours"
+
+msgid "Подпись"
+msgstr "Caption"
+
+msgid "Подробнее"
+msgstr "View details"
+
+msgid "Подтвердить отмену"
+msgstr "Confirm cancellation"
+
+msgid "Подтверждено"
+msgstr "Confirmed"
+
+msgid "Поиск..."
+msgstr "Search..."
+
+msgid "Пользователь"
+msgstr "User"
+
+msgid "Попробовать снова"
+msgstr "Try again"
+
+msgid "Попробуйте другие ключевые слова для интересов"
+msgstr "Try different interest keywords"
+
+msgid "Попробуйте изменить параметры поиска:"
+msgstr "Try changing your search criteria:"
+
+msgid "Порядок"
+msgstr "Order"
+
+msgid "Последняя"
+msgstr "Last"
+
+msgid "Посмотреть все туры"
+msgstr "View all tours"
+
+msgid "Посмотреть туры"
+msgstr "View tours"
+
+msgid "Похожие туры"
+msgstr "Similar tours"
+
+msgid "Почему выбирают нас?"
+msgstr "Why choose us?"
+
+msgid "Предпочитаемая длительность"
+msgstr "Preferred duration"
+
+msgid "Применить фильтры"
+msgstr "Apply filters"
+
+msgid "Проверьте значения фильтров: цена и длительность должны быть числами."
+msgstr "Check the filters: price and duration must be numbers."
+
+msgid "Проверяет свободные места и стоимость доступных дат"
+msgstr "Checks available spots and prices for available dates"
+
+msgid "Прозрачное ценообразование без скрытых платежей"
+msgstr "Transparent pricing with no hidden fees"
+
+msgid "Профессиональные гиды с многолетним опытом"
+msgstr "Professional guides with years of experience"
+
+msgid "Профиль"
+msgstr "Profile"
+
+msgid "Профиль обновлён."
+msgstr "Profile updated."
+
+msgid "Профиль:"
+msgstr "Profile:"
+
+msgid "Расскажите о ваших пожеланиях, и мы подберем идеальный тур!"
+msgstr "Tell us your preferences and we will find the perfect tour!"
+
+msgid "Регион"
+msgstr "Region"
+
+msgid "Регистрация"
+msgstr "Registration"
+
+msgid "Результаты подбора - Kyrgyz Tur"
+msgstr "Recommendations - Kyrgyz Tur"
+
+msgid "Рекомендуемый тур"
+msgstr "Featured tour"
+
+msgid "Свободно мест:"
+msgstr "Available spots:"
+
+msgid "Свободных мест"
+msgstr "Available spots"
+
+msgid "Сложность"
+msgstr "Difficulty"
+
+msgid "Сложный"
+msgstr "Hard"
+
+msgid "Сменить язык"
+msgstr "Change language"
+
+msgid "Создать аккаунт"
+msgstr "Create account"
+
+msgid "Сон-Куль"
+msgstr "Son-Kul"
+
+msgid "Сортирует результаты по степени совпадения с вашими предпочтениями"
+msgstr "Sorts results by how well they match your preferences"
+
+msgid "Сохранить"
+msgstr "Save"
+
+msgid "Спасибо за ваш отзыв!"
+msgstr "Thank you for your review!"
+
+msgid "Средний"
+msgstr "Moderate"
+
+msgid "Статус"
+msgstr "Status"
+
+msgid "Статус:"
+msgstr "Status:"
+
+msgid "Стоимость на человека:"
+msgstr "Price per person:"
+
+msgid "Текст сообщения"
+msgstr "Message text"
+
+msgid "Телефон"
+msgstr "Phone"
+
+msgid "Тема комментария"
+msgstr "Comment subject"
+
+msgid "Тур"
+msgstr "Tour"
+
+msgid "Туры"
+msgstr "Tours"
+
+msgid "Туры не найдены. Попробуйте изменить фильтры."
+msgstr "No tours found. Try changing the filters."
+
+msgid "У вас пока нет заявок."
+msgstr "You have no bookings yet."
+
+msgid "Увеличьте бюджет"
+msgstr "Increase your budget"
+
+msgid "Уже есть аккаунт? Войти"
+msgstr "Already have an account? Log in"
+
+msgid "Укажите оценку от 1 до 5 и текст отзыва."
+msgstr "Enter a rating from 1 to 5 and a review."
+
+msgid "Укажите хотя бы один день."
+msgstr "Specify at least one day."
+
+msgid "Фотография"
+msgstr "Photo"
+
+msgid "Цена (сом)"
+msgstr "Price (KGS)"
+
+msgid "Цена за человека"
+msgstr "Price per person"
+
+msgid "Цена: дешевые"
+msgstr "Price: lowest first"
+
+msgid "Цена: дорогие"
+msgstr "Price: highest first"
+
+msgid "Честные цены"
+msgstr "Fair prices"
+
+msgid "Что включено"
+msgstr "Included"
+
+msgid "Что не включено"
+msgstr "Not included"
+
+msgid "Эта дата уже недоступна для бронирования."
+msgstr "This date is no longer available for booking."
+
+msgid "дн. | 💪"
+msgstr "days | 💪"
+
+msgid "дней"
+msgstr "days"
+
+msgid "до"
+msgstr "up to"
+
+msgid "из"
+msgstr "of"
+
+msgid "сом"
+msgstr "KGS"
+
+msgid "сом."
+msgstr "KGS."
+
+msgid "чел."
+msgstr "people"
+
+msgid "чел. ·"
+msgstr "people ·"
+
+msgid "✓ Хорошее совпадение"
+msgstr "✓ Good match"
+
+msgid "⭐ Отличное совпадение!"
+msgstr "⭐ Great match!"
+
+msgid "🎯 Подбор тура по вашим предпочтениям"
+msgstr "🎯 Find a tour to suit you"
+
+msgid "🎯 Результаты подбора туров"
+msgstr "🎯 Tour recommendations"
+
+msgid "👥 Макс."
+msgstr "👥 Max."
+
+msgid "💡 Как это работает?"
+msgstr "💡 How does it work?"
+
+msgid "😔 К сожалению, подходящих туров не найдено"
+msgstr "😔 Sorry, no matching tours found"

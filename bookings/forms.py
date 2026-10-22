@@ -1,9 +1,10 @@
+from django.utils.translation import gettext_lazy as _
 from django import forms
 from .models import Booking, UserProfile
 
 
 class BookingForm(forms.ModelForm):
-    participants_count = forms.IntegerField(min_value=1, label='Количество человек')
+    participants_count = forms.IntegerField(min_value=1, label=_('Количество человек'))
 
     class Meta:
         model = Booking
@@ -20,9 +21,9 @@ class ProfileForm(forms.ModelForm):
         low, high = data.get('preferred_budget_min'), data.get('preferred_budget_max')
         for field in ('preferred_budget_min', 'preferred_budget_max'):
             if data.get(field) is not None and data[field] < 0:
-                self.add_error(field, 'Бюджет не может быть отрицательным.')
+                self.add_error(field, _('Бюджет не может быть отрицательным.'))
         if low is not None and high is not None and low > high:
-            self.add_error('preferred_budget_max', 'Максимум должен быть не меньше минимума.')
+            self.add_error('preferred_budget_max', _('Максимум должен быть не меньше минимума.'))
         if data.get('preferred_duration_days') == 0:
-            self.add_error('preferred_duration_days', 'Укажите хотя бы один день.')
+            self.add_error('preferred_duration_days', _('Укажите хотя бы один день.'))
         return data

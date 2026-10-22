@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -117,6 +118,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
 LANGUAGE_CODE = 'ru-ru'
+LANGUAGES = [('ru', 'Русский'), ('en', 'English')]
+LOCALE_PATHS = [BASE_DIR / 'locale']
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'kyrgyz-tur',
+    },
+}
 
 TIME_ZONE = 'Asia/Bishkek'
 
@@ -147,6 +157,16 @@ LOGOUT_REDIRECT_URL = 'home'
 
 MAILERS = {
     'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+        'BACKEND': os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend'),
+        'OPTIONS': {
+            'host': os.getenv('EMAIL_HOST', 'localhost'),
+            'port': int(os.getenv('EMAIL_PORT', '587')),
+            'username': os.getenv('EMAIL_HOST_USER', ''),
+            'password': os.getenv('EMAIL_HOST_PASSWORD', ''),
+            'use_tls': os.getenv('EMAIL_USE_TLS', 'true').lower() == 'true',
+            'timeout': 10,
+        } if os.getenv('EMAIL_BACKEND') == 'django.core.mail.backends.smtp.EmailBackend' else {},
     },
 }
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@localhost')
+COMMENT_NOTIFICATION_EMAIL = os.getenv('COMMENT_NOTIFICATION_EMAIL', 'admin@localhost')

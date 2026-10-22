@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -5,10 +6,14 @@ from django.db.models import Q, Avg, Count
 from django.core.paginator import Paginator
 from .models import Tour, TourDate, Region, TourCategory, Review
 from bookings.models import Booking
-from .forms import TourFilterForm, RecommendForm
+from .forms import TourFilterForm, RecommendForm, CommentForm
 from django.utils import timezone
 from decimal import Decimal
 import re
+from urllib.parse import urlencode
+from django.urls import reverse
+from django.db import transaction
+from .notifications import notify_new_comment
 
 
 def tour_list(request):
@@ -33,7 +38,7 @@ def tour_list(request):
         if value is not None:
             tours = tours.filter(**{lookup: value})
     if form.errors:
-        messages.error(request, 'Проверьте значения фильтров: цена и длительность должны быть числами.')
+        messages.error(request, _('Проверьте значения фильтров: цена и длительность должны быть числами.'))
     difficulty = request.GET.get('difficulty')
     if difficulty in dict(Tour.DIFFICULTY_CHOICES):
         tours = tours.filter(difficulty=difficulty)
@@ -73,6 +78,22 @@ def tour_detail(request, slug):
     )
 
     # Доступные даты
+    comment_form = CommentForm(request.POST if request.method == 'POST' else None)
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return redirect(f"{reverse('login')}?{urlencode({'next': request.path})}")
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.tour = tour
+            comment.user = request.user
+            comment.save()
+            comment_url = request.build_absolute_uri(
+                reverse('tours:tour_detail', kwargs={'slug': tour.slug}) + '#comments'
+            )
+            transaction.on_commit(lambda: notify_new_comment(comment, comment_url))
+            messages.success(request, _('Комментарий опубликован.'))
+            return redirect(f"{reverse('tours:tour_detail', kwargs={'slug': tour.slug})}#comments")
+
     available_dates = tour.get_available_dates()
 
     # Отзывы
@@ -91,6 +112,8 @@ def tour_detail(request, slug):
         'reviews': reviews,
         'avg_rating': avg_rating,
         'similar_tours': similar_tours,
+        'comments': tour.comments.filter(is_published=True).select_related('user'),
+        'comment_form': comment_form,
     }
 
     return render(request, 'tours/tour_detail.html', context)
@@ -147,19 +170,19 @@ def add_review(request, slug):
     ).exists()
 
     if not has_completed_booking:
-        messages.error(request, 'Вы можете оставить отзыв только после завершения тура')
+        messages.error(request, _('Вы можете оставить отзыв только после завершения тура'))
         return redirect('tours:tour_detail', slug=slug)
 
     # Проверяем, не оставлял ли пользователь уже отзыв
     if Review.objects.filter(user=request.user, tour=tour).exists():
-        messages.error(request, 'Вы уже оставили отзыв на этот тур')
+        messages.error(request, _('Вы уже оставили отзыв на этот тур'))
         return redirect('tours:tour_detail', slug=slug)
 
     if request.method == 'POST':
         rating = request.POST.get('rating', '')
         comment = request.POST.get('comment', '').strip()
         if rating not in ('1', '2', '3', '4', '5') or not comment:
-            messages.error(request, 'Укажите оценку от 1 до 5 и текст отзыва.')
+            messages.error(request, _('Укажите оценку от 1 до 5 и текст отзыва.'))
             return redirect('tours:tour_detail', slug=slug)
 
         Review.objects.create(
@@ -169,7 +192,7 @@ def add_review(request, slug):
             comment=comment
         )
 
-        messages.success(request, 'Спасибо за ваш отзыв!')
+        messages.success(request, _('Спасибо за ваш отзыв!'))
         return redirect('tours:tour_detail', slug=slug)
 
     return redirect('tours:tour_detail', slug=slug)

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Результаты подбора - Kyrgyz Tur{% endblock %}
+{% block title %}{% translate "Результаты подбора - Kyrgyz Tur" %}{% endblock %}
 
 {% block content %}
 <style>
@@ -56,61 +57,60 @@
     }
 </style>
 
-<h1>🎯 Результаты подбора туров</h1>
+<h1>{% translate "🎯 Результаты подбора туров" %}</h1>
 
 <div class="search-params">
-    <h3>Ваши критерии поиска:</h3>
-    <p><strong>Бюджет:</strong> до {{ budget }} сом</p>
+    <h3>{% translate "Ваши критерии поиска:" %}</h3>
+    <p><strong>{% translate "Бюджет:" %}</strong> {% translate "до" %} {{ budget }} {% translate "сом" %}</p>
     {% if duration %}
-        <p><strong>Длительность:</strong> {{ duration }} дней</p>
+        <p><strong>{% translate "Длительность:" %}</strong> {{ duration }} {% translate "дней" %}</p>
     {% endif %}
-    <p><strong>Интересы:</strong> {{ interests }}</p>
+    <p><strong>{% translate "Интересы:" %}</strong> {{ interests }}</p>
 </div>
 
 {% if scored_tours %}
-    <p style="margin-bottom: 2rem;">Найдено подходящих туров: <strong>{{ scored_tours|length }}</strong></p>
+    <p style="margin-bottom: 2rem;">{% translate "Найдено подходящих туров:" %} <strong>{{ scored_tours|length }}</strong></p>
 
     {% for item in scored_tours %}
         <div class="result-card">
             <div class="result-info">
                 <div>
-                    <span class="match-badge">{{ item.match_percentage }}% совпадение</span>
+                    <span class="match-badge">{{ item.match_percentage }}{% translate "% совпадение" %}</span>
                     {% if item.score >= 3 %}
-                        <span style="color: green; font-weight: bold;">⭐ Отличное совпадение!</span>
+                        <span style="color: green; font-weight: bold;">{% translate "⭐ Отличное совпадение!" %}</span>
                     {% elif item.score >= 2 %}
-                        <span style="color: orange; font-weight: bold;">✓ Хорошее совпадение</span>
+                        <span style="color: orange; font-weight: bold;">{% translate "✓ Хорошее совпадение" %}</span>
                     {% endif %}
                 </div>
                 <h3 class="result-title">{{ item.tour.name }}</h3>
                 <div class="result-meta">
                     📍 {{ item.tour.region.name }} |
-                    ⏱️ {{ item.tour.duration_days }} дн. |
-                    💪 {{ item.tour.get_difficulty_display }}
+                    ⏱️ {{ item.tour.duration_days }} {% translate "дн. | 💪" %} {{ item.tour.get_difficulty_display }}
                 </div>
                 <p>{{ item.tour.description|truncatewords:30 }}</p>
             </div>
             <div class="result-actions">
-                <div class="price-tag">{{ item.price|floatformat:2 }} сом</div>
-                <a href="{% url 'tours:tour_detail' item.tour.slug %}" class="btn">Подробнее</a>
+                <div class="price-tag">{{ item.price|floatformat:2 }} {% translate "сом" %}</div>
+                <a href="{% url 'tours:tour_detail' item.tour.slug %}" class="btn">{% translate "Подробнее" %}</a>
             </div>
         </div>
     {% endfor %}
 {% else %}
     <div style="text-align: center; padding: 3rem; background: #f8f9fa; border-radius: 8px;">
-        <h2 style="color: #666;">😔 К сожалению, подходящих туров не найдено</h2>
-        <p style="margin: 1rem 0;">Попробуйте изменить параметры поиска:</p>
+        <h2 style="color: #666;">{% translate "😔 К сожалению, подходящих туров не найдено" %}</h2>
+        <p style="margin: 1rem 0;">{% translate "Попробуйте изменить параметры поиска:" %}</p>
         <ul style="text-align: left; max-width: 400px; margin: 1rem auto;">
-            <li>Увеличьте бюджет</li>
-            <li>Измените длительность тура</li>
-            <li>Попробуйте другие ключевые слова для интересов</li>
+            <li>{% translate "Увеличьте бюджет" %}</li>
+            <li>{% translate "Измените длительность тура" %}</li>
+            <li>{% translate "Попробуйте другие ключевые слова для интересов" %}</li>
         </ul>
-        <a href="{% url 'tours:tour_recommend' %}" class="btn" style="margin-top: 1rem;">Попробовать снова</a>
-        <a href="{% url 'tours:tour_list' %}" class="btn btn-secondary" style="margin-top: 1rem;">Посмотреть все туры</a>
+        <a href="{% url 'tours:tour_recommend' %}" class="btn" style="margin-top: 1rem;">{% translate "Попробовать снова" %}</a>
+        <a href="{% url 'tours:tour_list' %}" class="btn btn-secondary" style="margin-top: 1rem;">{% translate "Посмотреть все туры" %}</a>
     </div>
 {% endif %}
 
 <div style="text-align: center; margin-top: 2rem;">
-    <a href="{% url 'tours:tour_recommend' %}" class="btn btn-secondary">Изменить параметры</a>
+    <a href="{% url 'tours:tour_recommend' %}" class="btn btn-secondary">{% translate "Изменить параметры" %}</a>
 </div>
 
 {% endblock %}

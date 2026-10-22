@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -15,7 +16,7 @@ def create_booking(request, tour_id, date_id):
     tour_date = get_object_or_404(TourDate, id=date_id, tour=tour)
 
     if tour_date.date < timezone.localdate() or tour_date.available_spots < 1:
-        messages.error(request, 'Эта дата уже недоступна для бронирования.')
+        messages.error(request, _('Эта дата уже недоступна для бронирования.'))
         return redirect('tours:tour_detail', slug=tour.slug)
     form = BookingForm(request.POST if request.method == 'POST' else None, initial={
         'participants_count': 1, 'contact_name': request.user.get_full_name() or request.user.username,
@@ -24,7 +25,7 @@ def create_booking(request, tour_id, date_id):
     if request.method == 'POST' and form.is_valid():
         count = form.cleaned_data['participants_count']
         if count > tour_date.available_spots:
-            form.add_error('participants_count', f'Доступно только {tour_date.available_spots} мест.')
+            form.add_error('participants_count', _('Доступно только %(count)s мест.') % {'count': tour_date.available_spots})
         else:
             booking = form.save(commit=False)
             booking.user = request.user
@@ -32,7 +33,7 @@ def create_booking(request, tour_id, date_id):
             booking.tour_date = tour_date
             booking.total_price = tour_date.get_final_price() * count
             booking.save()
-            messages.success(request, 'Заявка отправлена. Места закрепляются после подтверждения администратором.')
+            messages.success(request, _('Заявка отправлена. Места закрепляются после подтверждения администратором.'))
             return redirect('bookings:booking_detail', booking_id=booking.pk)
     return render(request, 'bookings/create_booking.html', {
         'tour': tour, 'tour_date': tour_date, 'final_price': tour_date.get_final_price(), 'form': form,
@@ -76,9 +77,9 @@ def cancel_booking(request, booking_id):
 
     if request.method == 'POST':
         if booking.cancel():
-            messages.success(request, 'Бронирование успешно отменено')
+            messages.success(request, _('Бронирование успешно отменено'))
         else:
-            messages.error(request, 'Не удалось отменить бронирование')
+            messages.error(request, _('Не удалось отменить бронирование'))
 
         return redirect('bookings:booking_list')
 
@@ -97,6 +98,6 @@ def profile_view(request):
     form = ProfileForm(request.POST if request.method == 'POST' else None, instance=profile)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, 'Профиль обновлён.')
+        messages.success(request, _('Профиль обновлён.'))
         return redirect('bookings:profile')
     return render(request, 'bookings/profile.html', {'profile': profile, 'form': form})

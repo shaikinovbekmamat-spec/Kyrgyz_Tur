@@ -1,9 +1,11 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="ru">
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Kyrgyz Tur - Туры по Кыргызстану{% endblock %}</title>
+    <title>{% block title %}{% translate "Kyrgyz Tur - Туры по Кыргызстану" %}{% endblock %}</title>
     <style>
         * {
             margin: 0;
@@ -125,19 +127,30 @@
             <nav>
                 <h1>🏔️ Kyrgyz Tur</h1>
                 <ul>
-                    <li><a href="{% url 'home' %}">Главная</a></li>
-                    <li><a href="{% url 'tours:tour_list' %}">Туры</a></li>
+                    <li><a href="{% url 'home' %}">{% translate "Главная" %}</a></li>
+                    <li><a href="{% url 'tours:tour_list' %}">{% translate "Туры" %}</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'tours:tour_recommend' %}">Подбор тура</a></li>
-                        <li><a href="{% url 'bookings:booking_list' %}">Мои бронирования</a></li>
-                        <li><a href="{% url 'bookings:profile' %}">Профиль</a></li>
-                        {% if user.is_staff %}<li><a href="{% url 'admin:index' %}">Администратор</a></li>{% endif %}
-                        <li><form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="btn" type="submit">Выход ({{ user.username }})</button></form></li>
+                        <li><a href="{% url 'tours:tour_recommend' %}">{% translate "Подбор тура" %}</a></li>
+                        <li><a href="{% url 'bookings:booking_list' %}">{% translate "Мои бронирования" %}</a></li>
+                        <li><a href="{% url 'bookings:profile' %}">{% translate "Профиль" %}</a></li>
+                        {% if user.is_staff %}<li><a href="{% url 'admin:index' %}">{% translate "Администратор" %}</a></li>{% endif %}
+                        <li><form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="btn" type="submit">{% translate "Выход (" %}{{ user.username }})</button></form></li>
                     {% else %}
-                        <li><a href="{% url 'login' %}">Вход</a></li>
-                        <li><a href="{% url 'register' %}">Регистрация</a></li>
+                        <li><a href="{% url 'login' %}">{% translate "Вход" %}</a></li>
+                        <li><a href="{% url 'register' %}">{% translate "Регистрация" %}</a></li>
                     {% endif %}
                 </ul>
+                <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                    <select name="language" aria-label="Language">
+                        {% get_available_languages as languages %}
+                        {% for code, name in languages %}
+                            <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn">{% translate "Сменить язык" %}</button>
+                </form>
             </nav>
         </div>
     </header>
@@ -160,7 +173,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Kyrgyz Tur. Туры по Кыргызстану - Иссык-Куль, Сон-Куль, Ала-Арча</p>
+            <p>{% translate "&copy; 2026 Kyrgyz Tur. Туры по Кыргызстану - Иссык-Куль, Сон-Куль, Ала-Арча" %}</p>
         </div>
     </footer>
 

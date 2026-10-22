@@ -91,8 +91,9 @@ class BookingAdmin(admin.ModelAdmin):
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'phone', 'bookings_count', 'created_at']
+    list_filter = ['created_at', 'user__is_active']
     search_fields = ['user__username', 'user__email', 'phone']
-    readonly_fields = ['created_at']
+    readonly_fields = ['created_at', 'bookings_count']
 
     fieldsets = (
         ('Основная информация', {
@@ -102,10 +103,10 @@ class UserProfileAdmin(admin.ModelAdmin):
             'fields': ('preferred_budget_min', 'preferred_budget_max', 'preferred_duration_days', 'interests')
         }),
         ('Метаданные', {
-            'fields': ('created_at',)
+            'fields': ('created_at', 'bookings_count')
         }),
     )
 
     def bookings_count(self, obj):
-        return obj.user.bookings.count()
+        return obj.user.bookings.count() if obj.user_id else 0
     bookings_count.short_description = 'Кол-во бронирований'

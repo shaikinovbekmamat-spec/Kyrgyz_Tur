@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}Вход — Kyrgyz Tur{% endblock %}
+{% load i18n %}
+{% block title %}{% translate "Вход — Kyrgyz Tur" %}{% endblock %}
 {% block content %}
-<h1>Вход в личный кабинет</h1>
+<h1>{% translate "Вход в личный кабинет" %}</h1>
 <form method="post">{% csrf_token %}{{ form.as_p }}
-<input type="hidden" name="next" value="{{ next }}"><button class="btn">Войти</button></form>
-<p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+<input type="hidden" name="next" value="{{ next }}"><button class="btn">{% translate "Войти" %}</button></form>
+<p>{% translate "Нет аккаунта?" %} <a href="{% url 'register' %}">{% translate "Зарегистрироваться" %}</a></p>
 {% endblock %}

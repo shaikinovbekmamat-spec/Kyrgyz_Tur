@@ -1,3 +1,4 @@
 {% extends 'base.html' %}
-{% block content %}<h1>Профиль: {{ user.username }}</h1>
-<form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn">Сохранить</button></form>{% endblock %}
+{% load i18n %}
+{% block content %}<h1>{% translate "Профиль:" %} {{ user.username }}</h1>
+<form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn">{% translate "Сохранить" %}</button></form>{% endblock %}

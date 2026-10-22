@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n cache %}
 
-{% block title %}Каталог туров - Kyrgyz Tur{% endblock %}
+{% block title %}{% translate "Каталог туров - Kyrgyz Tur" %}{% endblock %}
 
 {% block content %}
+{% get_current_language as LANGUAGE_CODE %}
+{% cache 60 tour_catalog LANGUAGE_CODE request.GET.urlencode %}
 <style>
     .filters {
         background: #f8f9fa;
@@ -85,55 +88,55 @@
     }
 </style>
 
-<h1>Каталог туров</h1>
+<h1>{% translate "Каталог туров" %}</h1>
 
 <div class="filters">
     <form method="get">
         <div class="filter-group">
-            <input type="text" name="search" placeholder="Поиск..." value="{{ search_query }}">
+            <input type="text" name="search" placeholder="{% translate "Поиск..." %}" value="{{ search_query }}">
 
             <select name="region">
-                <option value="">Все регионы</option>
+                <option value="">{% translate "Все регионы" %}</option>
                 {% for region in regions %}
                     <option value="{{ region.id }}" {% if request.GET.region == region.id|stringformat:'s' %}selected{% endif %}>{{ region.name }}</option>
                 {% endfor %}
             </select>
 
             <select name="difficulty">
-                <option value="">Любая сложность</option>
-                <option value="easy">Легкий</option>
-                <option value="medium">Средний</option>
-                <option value="hard">Сложный</option>
+                <option value="">{% translate "Любая сложность" %}</option>
+                <option value="easy">{% translate "Легкий" %}</option>
+                <option value="medium">{% translate "Средний" %}</option>
+                <option value="hard">{% translate "Сложный" %}</option>
             </select>
 
             <select name="duration">
-                <option value="">Любая длительность</option>
-                <option value="1">1 день</option>
-                <option value="2">2 дня</option>
-                <option value="3">3 дня</option>
-                <option value="5">5 дней</option>
-                <option value="7">7 дней</option>
+                <option value="">{% translate "Любая длительность" %}</option>
+                <option value="1">{% translate "1 день" %}</option>
+                <option value="2">{% translate "2 дня" %}</option>
+                <option value="3">{% translate "3 дня" %}</option>
+                <option value="5">{% translate "5 дней" %}</option>
+                <option value="7">{% translate "7 дней" %}</option>
             </select>
         </div>
 
         <div class="filter-group">
-            <input type="number" name="min_price" placeholder="Мин. цена" min="0" step="0.01" value="{{ request.GET.min_price }}">
-            <input type="number" name="max_price" placeholder="Макс. цена" min="0" step="0.01" value="{{ request.GET.max_price }}">
+            <input type="number" name="min_price" placeholder="{% translate "Мин. цена" %}" min="0" step="0.01" value="{{ request.GET.min_price }}">
+            <input type="number" name="max_price" placeholder="{% translate "Макс. цена" %}" min="0" step="0.01" value="{{ request.GET.max_price }}">
 
             <select name="sort">
-                <option value="-created_at">Новые</option>
-                <option value="price">Цена: дешевые</option>
-                <option value="-price">Цена: дорогие</option>
-                <option value="duration_days">Длительность</option>
+                <option value="-created_at">{% translate "Новые" %}</option>
+                <option value="price">{% translate "Цена: дешевые" %}</option>
+                <option value="-price">{% translate "Цена: дорогие" %}</option>
+                <option value="duration_days">{% translate "Длительность" %}</option>
             </select>
 
-            <button type="submit" class="btn">Применить фильтры</button>
+            <button type="submit" class="btn">{% translate "Применить фильтры" %}</button>
         </div>
     </form>
 </div>
 
 {% if page_obj %}
-    <p>Найдено туров: {{ page_obj.paginator.count }}</p>
+    <p>{% translate "Найдено туров:" %} {{ page_obj.paginator.count }}</p>
 
     <div class="tours-grid">
         {% for tour in page_obj %}
@@ -145,12 +148,11 @@
                     <h3 class="tour-title">{{ tour.name }}</h3>
                     <div class="tour-info">
                         📍 {{ tour.region.name }} |
-                        ⏱️ {{ tour.duration_days }} дн. |
-                        💪 {{ tour.get_difficulty_display }}
+                        ⏱️ {{ tour.duration_days }} {% translate "дн. | 💪" %} {{ tour.get_difficulty_display }}
                     </div>
                     <p>{{ tour.description|truncatewords:20 }}</p>
-                    <div class="tour-price">{{ tour.price }} сом</div>
-                    <a href="{% url 'tours:tour_detail' tour.slug %}" class="btn">Подробнее</a>
+                    <div class="tour-price">{{ tour.price }} {% translate "сом" %}</div>
+                    <a href="{% url 'tours:tour_detail' tour.slug %}" class="btn">{% translate "Подробнее" %}</a>
                 </div>
             </div>
         {% endfor %}
@@ -159,19 +161,20 @@
     {% if page_obj.has_other_pages %}
         <div class="pagination">
             {% if page_obj.has_previous %}
-                <a href="?{{ filter_query }}&amp;page=1">Первая</a>
-                <a href="?{{ filter_query }}&amp;page={{ page_obj.previous_page_number }}">Назад</a>
+                <a href="?{{ filter_query }}&amp;page=1">{% translate "Первая" %}</a>
+                <a href="?{{ filter_query }}&amp;page={{ page_obj.previous_page_number }}">{% translate "Назад" %}</a>
             {% endif %}
 
-            <span class="current">{{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+            <span class="current">{{ page_obj.number }} {% translate "из" %} {{ page_obj.paginator.num_pages }}</span>
 
             {% if page_obj.has_next %}
-                <a href="?{{ filter_query }}&amp;page={{ page_obj.next_page_number }}">Вперед</a>
-                <a href="?{{ filter_query }}&amp;page={{ page_obj.paginator.num_pages }}">Последняя</a>
+                <a href="?{{ filter_query }}&amp;page={{ page_obj.next_page_number }}">{% translate "Вперед" %}</a>
+                <a href="?{{ filter_query }}&amp;page={{ page_obj.paginator.num_pages }}">{% translate "Последняя" %}</a>
             {% endif %}
         </div>
     {% endif %}
 {% else %}
-    <p>Туры не найдены. Попробуйте изменить фильтры.</p>
+    <p>{% translate "Туры не найдены. Попробуйте изменить фильтры." %}</p>
 {% endif %}
+{% endcache %}
 {% endblock %}

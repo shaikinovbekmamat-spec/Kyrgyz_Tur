@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% block content %}<h1>Отмена заявки №{{ booking.pk }}</h1>
+{% load i18n %}
+{% block content %}<h1>{% translate "Отмена заявки №" %}{{ booking.pk }}</h1>
 <p>{{ booking.tour.name }} · {{ booking.tour_date.date }}</p>
-<form method="post">{% csrf_token %}<button class="btn btn-danger">Подтвердить отмену</button>
-<a href="{% url 'bookings:booking_detail' booking.pk %}">Вернуться</a></form>{% endblock %}
+<form method="post">{% csrf_token %}<button class="btn btn-danger">{% translate "Подтвердить отмену" %}</button>
+<a href="{% url 'bookings:booking_detail' booking.pk %}">{% translate "Вернуться" %}</a></form>{% endblock %}

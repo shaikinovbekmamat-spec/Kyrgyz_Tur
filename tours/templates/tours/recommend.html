@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Подбор тура - Kyrgyz Tur{% endblock %}
+{% block title %}{% translate "Подбор тура - Kyrgyz Tur" %}{% endblock %}
 
 {% block content %}
 <style>
@@ -39,22 +40,22 @@
     }
 </style>
 
-<h1 style="text-align: center; color: #667eea; margin-bottom: 1rem;">🎯 Подбор тура по вашим предпочтениям</h1>
+<h1 style="text-align: center; color: #667eea; margin-bottom: 1rem;">{% translate "🎯 Подбор тура по вашим предпочтениям" %}</h1>
 <p style="text-align: center; color: #666; margin-bottom: 2rem;">
-    Расскажите о ваших пожеланиях, и мы подберем идеальный тур!
+    {% translate "Расскажите о ваших пожеланиях, и мы подберем идеальный тур!" %}
 </p>
 
 <div class="recommend-form">
-    <form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn">Подобрать тур</button></form>
+    <form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn">{% translate "Подобрать тур" %}</button></form>
 </div>
 
 <div style="max-width: 800px; margin: 3rem auto; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
-    <h3 style="color: #667eea; margin-bottom: 1rem;">💡 Как это работает?</h3>
+    <h3 style="color: #667eea; margin-bottom: 1rem;">{% translate "💡 Как это работает?" %}</h3>
     <ul style="line-height: 2;">
-        <li>Алгоритм ищет туры, подходящие по вашему бюджету и длительности</li>
-        <li>Анализирует описания туров на соответствие вашим интересам</li>
-        <li>Проверяет свободные места и стоимость доступных дат</li>
-        <li>Сортирует результаты по степени совпадения с вашими предпочтениями</li>
+        <li>{% translate "Алгоритм ищет туры, подходящие по вашему бюджету и длительности" %}</li>
+        <li>{% translate "Анализирует описания туров на соответствие вашим интересам" %}</li>
+        <li>{% translate "Проверяет свободные места и стоимость доступных дат" %}</li>
+        <li>{% translate "Сортирует результаты по степени совпадения с вашими предпочтениями" %}</li>
     </ul>
 </div>
 

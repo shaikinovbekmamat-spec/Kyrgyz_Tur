@@ -22,6 +22,7 @@ from django.views.generic import TemplateView
 from users.views import register
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('tours/', include('tours.urls')),

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
-{% block content %}<h1>Регистрация</h1>
-<form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn">Создать аккаунт</button></form>
-<p><a href="{% url 'login' %}">Уже есть аккаунт? Войти</a></p>{% endblock %}
+{% load i18n %}
+{% block content %}<h1>{% translate "Регистрация" %}</h1>
+<form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn">{% translate "Создать аккаунт" %}</button></form>
+<p><a href="{% url 'login' %}">{% translate "Уже есть аккаунт? Войти" %}</a></p>{% endblock %}
