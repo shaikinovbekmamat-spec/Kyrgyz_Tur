@@ -1,0 +1,14 @@
+.git
+.venv
+.idea
+.tmp
+.deps
+.env
+.env.*
+!.env.example
+backups
+media
+htmlcov
+.coverage*
+*.sqlite3
+**/__pycache__

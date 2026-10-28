@@ -8,6 +8,9 @@ media/
 staticfiles/
 *.sqlite3
 .env
+.env.*
+!.env.example
+.vercel/
 backups/
 .coverage
 .coverage.*
