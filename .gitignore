@@ -9,3 +9,7 @@ staticfiles/
 *.sqlite3
 .env
 backups/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml

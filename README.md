@@ -88,4 +88,44 @@ python manage.py test
 не кешируются. Изменения туров появляются в каталоге в течение минуты.
 Используется локальный кеш процесса; после перезапуска он очищается.
 
-Проверка: `.venv/Scripts/python.exe manage.py test --settings=Kyrgyz_Tur.sqlite_settings`.
+## Тесты и покрытие
+
+Установка зависимостей для разработки и запуск всех тестов:
+
+```powershell
+.venv/Scripts/python.exe -m pip install -r requirements-dev.txt
+.venv/Scripts/python.exe manage.py test --settings=Kyrgyz_Tur.test_settings
+```
+
+`test_settings` использует отдельную SQLite-базу в памяти, локальный кеш,
+почтовый backend в памяти и быстрый хешер паролей только для тестов.
+Рабочая база не изменяется, PostgreSQL и SMTP для этого запуска не нужны.
+
+Измерение покрытия, включая ветвления, и HTML-отчёт:
+
+```powershell
+.venv/Scripts/python.exe -m coverage run manage.py test --settings=Kyrgyz_Tur.test_settings
+.venv/Scripts/python.exe -m coverage report
+.venv/Scripts/python.exe -m coverage html
+```
+
+Отчёт открывается из `htmlcov/index.html`. В `.coveragerc` задан порог 95%:
+`coverage report` завершится с ошибкой при меньшем покрытии. Из измерения исключены
+сами тесты и миграции; учитывается код приложений `tours`, `bookings`, `users`.
+
+Набор проверяет каталог, поиск, фильтры и пагинацию, рекомендации и границы бюджета,
+валидацию моделей и форм, регистрацию и вход, права доступа, создание и отмену
+бронирований, учёт мест, профиль, административные действия, отзывы, комментарии,
+почту, кеш и переключение языка. Общие данные для новых тестов находятся в
+`tours/test_helpers.py`; кеш очищается между этими тестами.
+
+Для проверки на PostgreSQL с параметрами из `.env`:
+
+```powershell
+.venv/Scripts/python.exe manage.py test
+```
+
+Пользователю PostgreSQL требуется право создания тестовой базы. SQLite-прогон
+не проверяет поведение блокировок PostgreSQL при одновременных транзакциях;
+тесты повторного подтверждения проверяют последовательные обращения и устаревшие
+экземпляры моделей, а не параллельные запросы.
